@@ -16,13 +16,14 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.*;
 
 
-public class WXPayUtil {
+public class WXPayUtil implements Serializable {
 
     private static final String SYMBOLS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
