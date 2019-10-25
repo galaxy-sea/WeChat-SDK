@@ -71,10 +71,6 @@ public class XmlSerializableUtils {
     public static Map<String, String> toMap(String xml) throws DocumentException {
         Document document = DocumentHelper.parseText(xml);
         Element rootElement = document.getRootElement();
-        rootElement.elementIterator().forEachRemaining(element -> {
-            String name = element.getName();
-            String text = element.getText();
-        });
         Map<String, String> map = new HashMap<String, String>();
         rootElement.elementIterator().forEachRemaining(element ->
                 map.put(element.getName(), element.getText())
