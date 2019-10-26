@@ -1,6 +1,6 @@
 package com.galaxy.wechat.pay.miniprogram.bean.request;
 
-import com.galaxy.wechat.pay.miniprogram.util.XmlSerializable;
+import com.galaxy.wechat.pay.miniprogram.bean.AbstractBean;
 import com.galaxy.wechat.pay.miniprogram.util.XmlValue;
 
 /**
@@ -9,19 +9,8 @@ import com.galaxy.wechat.pay.miniprogram.util.XmlValue;
  * @Author galaxy
  * @Date 2019/10/19 13:29
  **/
-public class PayUnifiedorder implements XmlSerializable {
+public class PayUnifiedorder extends AbstractBean {
 
-    @XmlValue(name = "appid")
-    private String appid;
-
-    @XmlValue(name = "mch_id")
-    private String mchId;
-
-    @XmlValue(name = "nonce_str")
-    private String nonceStr;
-
-    @XmlValue(name = "sign")
-    private String sign;
 
     @XmlValue(name = "body")
     private String body;
@@ -47,8 +36,6 @@ public class PayUnifiedorder implements XmlSerializable {
     @XmlValue(name = "detail", isCDATA = true)
     private String detail;
 
-    @XmlValue(name = "sign_type")
-    private String signType;
 
     @XmlValue(name = "attach")
     private String attach;
@@ -80,38 +67,6 @@ public class PayUnifiedorder implements XmlSerializable {
     @XmlValue(name = "scene_info")
     private String sceneinfo;
 
-
-    public String getAppid() {
-        return appid;
-    }
-
-    public void setAppid(String appid) {
-        this.appid = appid;
-    }
-
-    public String getMchId() {
-        return mchId;
-    }
-
-    public void setMchId(String mchId) {
-        this.mchId = mchId;
-    }
-
-    public String getNonceStr() {
-        return nonceStr;
-    }
-
-    public void setNonceStr(String nonceStr) {
-        this.nonceStr = nonceStr;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
 
     public String getBody() {
         return body;
@@ -177,13 +132,6 @@ public class PayUnifiedorder implements XmlSerializable {
         this.detail = detail;
     }
 
-    public String getSignType() {
-        return signType;
-    }
-
-    public void setSignType(String signType) {
-        this.signType = signType;
-    }
 
     public String getAttach() {
         return attach;
@@ -268,11 +216,7 @@ public class PayUnifiedorder implements XmlSerializable {
     @Override
     public String toString() {
         return "PayUnifiedorder{" +
-                "appid='" + appid + '\'' +
-                ", mchId='" + mchId + '\'' +
-                ", nonceStr='" + nonceStr + '\'' +
-                ", sign='" + sign + '\'' +
-                ", body='" + body + '\'' +
+                "body='" + body + '\'' +
                 ", outTradeNo='" + outTradeNo + '\'' +
                 ", totalFee=" + totalFee +
                 ", spbillCreateIp='" + spbillCreateIp + '\'' +
@@ -280,7 +224,6 @@ public class PayUnifiedorder implements XmlSerializable {
                 ", tradeType='" + tradeType + '\'' +
                 ", deviceInfo='" + deviceInfo + '\'' +
                 ", detail='" + detail + '\'' +
-                ", signType='" + signType + '\'' +
                 ", attach='" + attach + '\'' +
                 ", feeType='" + feeType + '\'' +
                 ", timeStart='" + timeStart + '\'' +
@@ -291,6 +234,6 @@ public class PayUnifiedorder implements XmlSerializable {
                 ", openid='" + openid + '\'' +
                 ", receipt='" + receipt + '\'' +
                 ", sceneinfo='" + sceneinfo + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }

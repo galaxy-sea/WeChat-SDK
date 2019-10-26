@@ -1,13 +1,13 @@
 package com.galaxy.wechat.pay.miniprogram.bean.response;
 
-import com.galaxy.wechat.pay.miniprogram.util.XmlSerializable;
+import com.galaxy.wechat.pay.miniprogram.bean.AbstractBean;
 import com.galaxy.wechat.pay.miniprogram.util.XmlValue;
 
 /**
  * @Author galaxy
  * @Date 2019/10/20 18:40
  **/
-public class ResultPayPayUnifiedorder implements XmlSerializable {
+public class ResultPayPayUnifiedorder extends AbstractBean {
 
     @XmlValue(name = "trade_type", isCDATA = true)
     protected String tradeType;
