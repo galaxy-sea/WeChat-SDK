@@ -9,6 +9,8 @@ import org.dom4j.Element;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 /**
@@ -73,4 +75,23 @@ public class XmlSerializableUtils {
     }
 
 
+    /** object to map */
+    public static Map<String, String> toMap(AbstractBean abstractBean) throws IllegalAccessException {
+
+        Map<String, String> map = new TreeMap<String, String>();
+
+        List<Field> fields = ReflectUtils.getAllField(abstractBean.getClass());
+        for (Field field : fields) {
+            XmlValue xmlValue = field.getAnnotation(XmlValue.class);
+            if (xmlValue != null) {
+                field.setAccessible(true);
+                Object value = field.get(abstractBean);
+                field.setAccessible(false);
+                if (value != null) {
+                    map.put(xmlValue.name(), String.valueOf(value));
+                }
+            }
+        }
+        return map;
+    }
 }

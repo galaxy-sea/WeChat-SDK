@@ -25,23 +25,7 @@ public class SignatureUtils {
      */
     public static String generateSignature(AbstractBean abstractBean, String key) throws Exception {
 
-        Map<String, String> map = new TreeMap<String, String>();
-
-        List<Field> allField = ReflectUtils.getAllField(abstractBean.getClass());
-        for (Field field : allField) {
-            XmlValue annotation = field.getDeclaredAnnotation(XmlValue.class);
-            if (annotation == null) {
-                continue;
-            }
-            field.setAccessible(true);
-            String name = annotation.name();
-            Object value = field.get(abstractBean);
-            field.setAccessible(false);
-            if (value == null) {
-                continue;
-            }
-            map.put(name, String.valueOf(value));
-        }
+        Map<String, String> map = XmlSerializableUtils.toMap(abstractBean);
 
         StringBuffer sb = new StringBuffer();
         for (Map.Entry<String, String> entry : map.entrySet()) {
