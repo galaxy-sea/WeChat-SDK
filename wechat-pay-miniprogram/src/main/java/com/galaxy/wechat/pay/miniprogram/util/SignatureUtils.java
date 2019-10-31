@@ -29,7 +29,7 @@ public class SignatureUtils {
 
         StringBuffer sb = new StringBuffer();
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            sb.append(entry.getKey()).append("=").append("&");
+            sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         }
         sb.append("key=").append(key);
 
