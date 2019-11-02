@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 public @interface XmlValue {
 
     /** xml的标签名 */
-    String name() default "";
+    String name();
 
     /** 标签的参数是否为 CDATA 默认为  false */
     boolean isCDATA() default false;

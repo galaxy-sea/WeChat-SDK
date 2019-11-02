@@ -115,7 +115,7 @@ public class XmlSerializableUtils {
         return getAllField(clazz.getSuperclass(), allField);
     }
 
-    /** 把object转换成相应的配型 */
+    /** 使用fast json的类型转换工具把object转换成相应的类型 */
     private static <T> T castToJavaBean(Object obj, Class<T> clazz) {
         return com.alibaba.fastjson.util.TypeUtils.castToJavaBean(obj, clazz);
     }

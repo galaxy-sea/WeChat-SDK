@@ -15,25 +15,25 @@ public class SignatureUtils {
     /**
      * 生成Sign， abstractBean中的sign在包含生成当中, 请手动复制为null
      */
-    public static String generateSignature(final BaseEntity baseEntity, final String key) throws Exception {
-        if (baseEntity.getSignType() == null) {
-            baseEntity.setSignType(WXPayConstants.SignType.MD5.getType());
-        }
+    public static String generateSignature(final BaseEntity baseEntity, SignType signType, final String key) throws Exception {
+        baseEntity.setSignType(SignType.MD5.getType());
+        Map<String, String> map = XmlSerializableUtils.toMap(baseEntity);
+        return generateSignature(map, signType, key);
+    }
 
-        final Map<String, String> map = XmlSerializableUtils.toMap(baseEntity);
-
+    public static String generateSignature(Map<String, String> map, SignType signType, final String key) throws Exception {
         final StringBuffer sb = new StringBuffer();
         for (final Map.Entry<String, String> entry : map.entrySet()) {
             sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         }
         sb.append("key=").append(key);
 
-        if (WXPayConstants.SignType.MD5.getType().equals(baseEntity.getSignType())) {
+        if (SignType.MD5.equals(signType)) {
             return md5(sb.toString()).toUpperCase();
-        } else if (WXPayConstants.SignType.MD5.getType().equals(baseEntity.getSignType())) {
+        } else if (SignType.HMAC_SHA256.equals(signType)) {
             return hmacsha256(sb.toString(), key);
         } else {
-            throw new Exception(String.format("Invalid sign_type: %s", baseEntity.getSignType()));
+            throw new Exception(String.format("Invalid signType: %s", signType));
         }
     }
 
