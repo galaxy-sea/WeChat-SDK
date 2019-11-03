@@ -1,12 +1,13 @@
-package com.galaxy.miniprogram.bean.response;
+package com.galaxy.miniprogram.bean.unifiedorder;
 
+import com.galaxy.miniprogram.bean.BaseReturnEntity;
 import com.galaxy.miniprogram.util.XmlValue;
 
 /**
  * @Author galaxy
  * @Date 2019/10/20 18:40
  **/
-public class ResultPayUnifiedOrder extends BaseReturnEntity {
+public class ResultUnifiedOrder extends BaseReturnEntity {
 
     /**
      * 交易类型，取值为：JSAPI，NATIVE，APP等

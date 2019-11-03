@@ -1,9 +1,14 @@
 package com.galaxy.miniprogram;
 
 import com.alibaba.fastjson.JSON;
-import com.galaxy.miniprogram.bean.dto.PaySignDTO;
-import com.galaxy.miniprogram.bean.request.UnifiedOrder;
-import com.galaxy.miniprogram.bean.response.ResultPayUnifiedOrder;
+import com.galaxy.miniprogram.bean.BaseEntity;
+import com.galaxy.miniprogram.bean.unifiedorder.PaySignDTO;
+import com.galaxy.miniprogram.bean.orderquery.OrderQuery;
+import com.galaxy.miniprogram.bean.unifiedorder.UnifiedOrder;
+import com.galaxy.miniprogram.bean.orderquery.ResultOrderQuery;
+import com.galaxy.miniprogram.bean.unifiedorder.ResultUnifiedOrder;
+import com.galaxy.miniprogram.service.WeChatPayService;
+import com.galaxy.miniprogram.service.impl.WeChatPayServiceImpl;
 import com.galaxy.miniprogram.util.SignType;
 import org.junit.Test;
 
@@ -11,9 +16,14 @@ public class WeChatPayTest {
 
     private static final String KEY = "adminllwl20191111llwladmin666666";
 
+    public void set(BaseEntity entity) {
+        entity.setAppid("wx452861bdcf531613");
+        entity.setMchId("1561031551");
+    }
+
     @Test
     public void unifiedOrder() throws Exception {
-        WeChatPay weChatPay = new WeChatPay();
+        WeChatPayService weChatPay = new WeChatPayServiceImpl();
 
 
         UnifiedOrder unifiedOrder = new UnifiedOrder();
@@ -29,12 +39,23 @@ public class WeChatPayTest {
         unifiedOrder.setMchId("1561031551");
         unifiedOrder.setOpenid("oc6cs5Fg7-XMANpQEnJ8b-cLTTik");
 
-        ResultPayUnifiedOrder resultPayUnifiedOrder = weChatPay.unifiedOrder(unifiedOrder, SignType.MD5, KEY);
+        ResultUnifiedOrder resultUnifiedOrder = weChatPay.unifiedOrder(unifiedOrder, SignType.MD5, KEY);
 
-        PaySignDTO paySignDTO = weChatPay.toPaySignDTO(resultPayUnifiedOrder, SignType.MD5, KEY);
+        PaySignDTO paySignDTO = weChatPay.toPaySignDTO(resultUnifiedOrder, SignType.MD5, KEY);
 
-        System.out.println(JSON.toJSONString(resultPayUnifiedOrder));
+        System.out.println(JSON.toJSONString(resultUnifiedOrder));
         System.out.println(JSON.toJSONString(paySignDTO));
+
+    }
+
+    @Test
+    public void orderQuery() throws Exception {
+        WeChatPayService weChatPay = new WeChatPayServiceImpl();
+        OrderQuery orderQuery = new OrderQuery();
+        set(orderQuery);
+        orderQuery.setOutTradeNo("20191103113619");
+        ResultOrderQuery resultOrderQuery = weChatPay.orderQuery(orderQuery, SignType.MD5, KEY);
+        System.out.println(JSON.toJSONString(resultOrderQuery));
 
     }
 }

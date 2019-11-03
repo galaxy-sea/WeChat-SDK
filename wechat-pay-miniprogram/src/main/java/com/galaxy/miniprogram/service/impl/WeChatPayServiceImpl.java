@@ -1,23 +1,26 @@
-package com.galaxy.miniprogram;
+package com.galaxy.miniprogram.service.impl;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
-import com.galaxy.miniprogram.bean.dto.PaySignDTO;
-import com.galaxy.miniprogram.bean.request.UnifiedOrder;
-import com.galaxy.miniprogram.bean.response.BaseReturnEntity;
-import com.galaxy.miniprogram.bean.response.ResultPayUnifiedOrder;
+import com.galaxy.miniprogram.bean.unifiedorder.PaySignDTO;
+import com.galaxy.miniprogram.bean.closeorder.CloseOrder;
+import com.galaxy.miniprogram.bean.orderquery.OrderQuery;
+import com.galaxy.miniprogram.bean.unifiedorder.UnifiedOrder;
+import com.galaxy.miniprogram.bean.BaseReturnEntity;
+import com.galaxy.miniprogram.bean.closeorder.ResultCloseOrder;
+import com.galaxy.miniprogram.bean.orderquery.ResultOrderQuery;
+import com.galaxy.miniprogram.bean.unifiedorder.ResultUnifiedOrder;
+import com.galaxy.miniprogram.service.WeChatPayService;
 import com.galaxy.miniprogram.util.HttpUtils;
 import com.galaxy.miniprogram.util.SignType;
 import com.galaxy.miniprogram.util.SignatureUtils;
 import com.galaxy.miniprogram.util.XmlSerializableUtils;
 
 import java.net.URI;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * @author galaxy
  */
-public class WeChatPay {
+public class WeChatPayServiceImpl implements WeChatPayService {
 
     private static final String PREPAY_ID_STR;
 
@@ -64,8 +67,14 @@ public class WeChatPay {
         entity.setSign(sign);
         String requestBody = XmlSerializableUtils.toXml(entity);
         System.out.println(requestBody);
+        System.out.println();
+        System.out.println();
+        System.out.println();
         String responseBody = HttpUtils.doPost(uri, requestBody);
         System.out.println(responseBody);
+        System.out.println();
+        System.out.println();
+        System.out.println();
         return XmlSerializableUtils.toObject(responseBody, clazz);
     }
 
@@ -76,9 +85,8 @@ public class WeChatPay {
      * 接口链接
      * URL地址：https://api.mch.weixin.qq.com/pay/unifiedorder
      */
-
-    public ResultPayUnifiedOrder unifiedOrder(UnifiedOrder unifiedOrder, SignType signType, String key) throws Exception {
-        return starWars(unifiedOrder, signType, key, UNIFIEDORDER_URI, ResultPayUnifiedOrder.class);
+    public ResultUnifiedOrder unifiedOrder(UnifiedOrder unifiedOrder, SignType signType, String key) throws Exception {
+        return starWars(unifiedOrder, signType, key, UNIFIEDORDER_URI, ResultUnifiedOrder.class);
     }
 
 
@@ -91,18 +99,19 @@ public class WeChatPay {
      * 数据包	package	是	String	prepay_id=wx2017033010242291fcfe0db70013231072	统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=wx2017033010242291fcfe0db70013231072
      * 签名方式	signType	是	String	MD5	签名类型，默认为MD5，支持HMAC-SHA256和MD5。注意此处需与统一下单的签名类型一致
      *
-     * @param resultPayUnifiedOrder
+     * @param resultUnifiedOrder
      * @param signType
      * @param key
      * @return
      * @throws Exception
      */
-    public PaySignDTO toPaySignDTO(ResultPayUnifiedOrder resultPayUnifiedOrder, SignType signType, String key) throws Exception {
+    @Override
+    public PaySignDTO toPaySignDTO(ResultUnifiedOrder resultUnifiedOrder, SignType signType, String key) throws Exception {
 
         PaySignDTO paySign = new PaySignDTO();
-        paySign.setAppid(resultPayUnifiedOrder.getAppid());
+        paySign.setAppid(resultUnifiedOrder.getAppid());
         paySign.setNonceStr(SignatureUtils.generateNonceStr());
-        paySign.setPrepayId(PREPAY_ID_STR + resultPayUnifiedOrder.getPrepayId());
+        paySign.setPrepayId(PREPAY_ID_STR + resultUnifiedOrder.getPrepayId());
         paySign.setSignType(signType.getType());
         paySign.setTimeStamp(String.valueOf(System.currentTimeMillis() / 1000));
 
@@ -110,5 +119,15 @@ public class WeChatPay {
         paySign.setSign(sign);
 
         return paySign;
+    }
+
+    @Override
+    public ResultOrderQuery orderQuery(OrderQuery orderQuery, SignType signType, String key) throws Exception {
+        return starWars(orderQuery, signType, key, ORDERQUERY_URI, ResultOrderQuery.class);
+    }
+
+    @Override
+    public ResultCloseOrder closeOrder(CloseOrder closeOrder, SignType signType, String key) throws Exception {
+        return starWars(closeOrder, signType, key, CLOSEORDER_URI, ResultCloseOrder.class);
     }
 }

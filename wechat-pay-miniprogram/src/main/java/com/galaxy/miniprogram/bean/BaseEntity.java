@@ -3,6 +3,13 @@ package com.galaxy.miniprogram.bean;
 import com.galaxy.miniprogram.util.XmlValue;
 
 /**
+ * 公共的五个参数
+ * appid
+ * mch_id
+ * nonce_str
+ * sign
+ * sign_type
+ *
  * @author galaxy
  */
 public abstract class BaseEntity {

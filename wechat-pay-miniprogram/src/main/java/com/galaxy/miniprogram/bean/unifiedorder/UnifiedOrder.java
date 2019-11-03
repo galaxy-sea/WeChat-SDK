@@ -1,4 +1,4 @@
-package com.galaxy.miniprogram.bean.request;
+package com.galaxy.miniprogram.bean.unifiedorder;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
 import com.galaxy.miniprogram.util.XmlValue;
