@@ -1,14 +1,18 @@
 package com.galaxy.miniprogram.service.impl;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
-import com.galaxy.miniprogram.bean.unifiedorder.PaySignDTO;
-import com.galaxy.miniprogram.bean.closeorder.CloseOrder;
-import com.galaxy.miniprogram.bean.orderquery.OrderQuery;
-import com.galaxy.miniprogram.bean.unifiedorder.UnifiedOrder;
 import com.galaxy.miniprogram.bean.BaseReturnEntity;
+import com.galaxy.miniprogram.bean.closeorder.CloseOrder;
 import com.galaxy.miniprogram.bean.closeorder.ResultCloseOrder;
+import com.galaxy.miniprogram.bean.orderquery.OrderQuery;
 import com.galaxy.miniprogram.bean.orderquery.ResultOrderQuery;
+import com.galaxy.miniprogram.bean.refund.Refund;
+import com.galaxy.miniprogram.bean.refund.ResultRefund;
+import com.galaxy.miniprogram.bean.refundquery.RefundQuery;
+import com.galaxy.miniprogram.bean.refundquery.ResultRefundQuery;
+import com.galaxy.miniprogram.bean.unifiedorder.PaySignDTO;
 import com.galaxy.miniprogram.bean.unifiedorder.ResultUnifiedOrder;
+import com.galaxy.miniprogram.bean.unifiedorder.UnifiedOrder;
 import com.galaxy.miniprogram.service.WeChatPayService;
 import com.galaxy.miniprogram.util.HttpUtils;
 import com.galaxy.miniprogram.util.SignType;
@@ -26,15 +30,15 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
 
     /** 统一下单 */
-    private static final URI UNIFIEDORDER_URI;
+    private static final URI UNIFIED_ORDER_URI;
     /** 查询订单 */
-    private static final URI ORDERQUERY_URI;
+    private static final URI ORDER_QUERY_URI;
     /** 关闭订单 */
-    private static final URI CLOSEORDER_URI;
+    private static final URI CLOSE_ORDER_URI;
     /** 申请退款 */
     private static final URI REFUND_URI;
     /** 查询退款 */
-    private static final URI REFUNDQUERY_URI;
+    private static final URI REFUND_QUERY_URI;
     /** 下载对账单 */
     private static final URI DOWNLOADBILL_URI;
     /** 下载资金账单 */
@@ -49,11 +53,11 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
         PREPAY_ID_STR = "prepay_id=";
 
-        UNIFIEDORDER_URI = URI.create("https://api.mch.weixin.qq.com/pay/unifiedorder");
-        ORDERQUERY_URI = URI.create("https://api.mch.weixin.qq.com/pay/orderquery");
-        CLOSEORDER_URI = URI.create("https://api.mch.weixin.qq.com/pay/closeorder");
+        UNIFIED_ORDER_URI = URI.create("https://api.mch.weixin.qq.com/pay/unifiedorder");
+        ORDER_QUERY_URI = URI.create("https://api.mch.weixin.qq.com/pay/orderquery");
+        CLOSE_ORDER_URI = URI.create("https://api.mch.weixin.qq.com/pay/closeorder");
         REFUND_URI = URI.create("https://api.mch.weixin.qq.com/secapi/pay/refund");
-        REFUNDQUERY_URI = URI.create("https://api.mch.weixin.qq.com/secapi/pay/refund");
+        REFUND_QUERY_URI = URI.create("https://api.mch.weixin.qq.com/secapi/pay/refund");
         DOWNLOADBILL_URI = URI.create("https://api.mch.weixin.qq.com/pay/downloadbill");
         DOWNLOADFUNDFLOW_URI = URI.create("https://api.mch.weixin.qq.com/pay/downloadfundflow");
         REPORT_URI = URI.create("https://api.mch.weixin.qq.com/payitil/report");
@@ -86,7 +90,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
      * URL地址：https://api.mch.weixin.qq.com/pay/unifiedorder
      */
     public ResultUnifiedOrder unifiedOrder(UnifiedOrder unifiedOrder, SignType signType, String key) throws Exception {
-        return starWars(unifiedOrder, signType, key, UNIFIEDORDER_URI, ResultUnifiedOrder.class);
+        return starWars(unifiedOrder, signType, key, UNIFIED_ORDER_URI, ResultUnifiedOrder.class);
     }
 
 
@@ -123,11 +127,21 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
     @Override
     public ResultOrderQuery orderQuery(OrderQuery orderQuery, SignType signType, String key) throws Exception {
-        return starWars(orderQuery, signType, key, ORDERQUERY_URI, ResultOrderQuery.class);
+        return starWars(orderQuery, signType, key, ORDER_QUERY_URI, ResultOrderQuery.class);
     }
 
     @Override
     public ResultCloseOrder closeOrder(CloseOrder closeOrder, SignType signType, String key) throws Exception {
-        return starWars(closeOrder, signType, key, CLOSEORDER_URI, ResultCloseOrder.class);
+        return starWars(closeOrder, signType, key, CLOSE_ORDER_URI, ResultCloseOrder.class);
+    }
+
+    @Override
+    public ResultRefund refund(Refund refund, SignType signType, String key) throws Exception {
+        return starWars(refund, signType, key, REFUND_URI, ResultRefund.class);
+    }
+
+    @Override
+    public ResultRefundQuery refund(RefundQuery refundQuery, SignType signType, String key) throws Exception {
+        return starWars(refundQuery, signType, key, REFUND_QUERY_URI, ResultRefundQuery.class);
     }
 }

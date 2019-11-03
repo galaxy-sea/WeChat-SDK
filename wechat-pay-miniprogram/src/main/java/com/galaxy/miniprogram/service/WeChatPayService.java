@@ -1,12 +1,16 @@
 package com.galaxy.miniprogram.service;
 
-import com.galaxy.miniprogram.bean.unifiedorder.PaySignDTO;
 import com.galaxy.miniprogram.bean.closeorder.CloseOrder;
-import com.galaxy.miniprogram.bean.orderquery.OrderQuery;
-import com.galaxy.miniprogram.bean.unifiedorder.UnifiedOrder;
 import com.galaxy.miniprogram.bean.closeorder.ResultCloseOrder;
+import com.galaxy.miniprogram.bean.orderquery.OrderQuery;
 import com.galaxy.miniprogram.bean.orderquery.ResultOrderQuery;
+import com.galaxy.miniprogram.bean.refund.Refund;
+import com.galaxy.miniprogram.bean.refund.ResultRefund;
+import com.galaxy.miniprogram.bean.refundquery.RefundQuery;
+import com.galaxy.miniprogram.bean.refundquery.ResultRefundQuery;
+import com.galaxy.miniprogram.bean.unifiedorder.PaySignDTO;
 import com.galaxy.miniprogram.bean.unifiedorder.ResultUnifiedOrder;
+import com.galaxy.miniprogram.bean.unifiedorder.UnifiedOrder;
 import com.galaxy.miniprogram.util.SignType;
 
 /**
@@ -48,4 +52,8 @@ public interface WeChatPayService {
 
 
     ResultCloseOrder closeOrder(CloseOrder closeOrder, SignType signType, String key) throws Exception;
+
+    ResultRefund refund(Refund refund, SignType signType, String key) throws Exception;
+
+    ResultRefundQuery refund(RefundQuery refundQuery, SignType signType, String key) throws Exception;
 }
