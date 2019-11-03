@@ -9,32 +9,30 @@ import com.galaxy.miniprogram.util.XmlValue;
 public class ResultPayUnifiedOrder extends BaseReturnEntity {
 
     /**
-     * 是
      * 交易类型，取值为：JSAPI，NATIVE，APP等
      */
     @XmlValue(name = "device_info", isCDATA = true)
-    protected String deviceInfo;
+    private String deviceInfo;
 
     /**
-     * 是
      * 微信生成的预支付会话标识，用于后续接口调用中使用，该值有效期为2小时
      */
     @XmlValue(name = "trade_type", isCDATA = true)
-    protected String tradeType;
+    private String tradeType;
 
     /**
-     * 否
      * trade_type=NATIVE时有返回，此url用于生成支付二维码，然后提供给用户进行扫码支付。
      * 注意：code_url的值并非固定，使用时按照URL格式转成二维码即可
      */
     @XmlValue(name = "prepay_id", isCDATA = true)
-    protected String prepayId;
+    private String prepayId;
 
     /**
-     *
+     * trade_type=NATIVE时有返回，此url用于生成支付二维码，然后提供给用户进行扫码支付。
+     * 注意：code_url的值并非固定，使用时按照URL格式转成二维码即可
      */
     @XmlValue(name = "code_url", isCDATA = true)
-    protected String codeUrl;
+    private String codeUrl;
 
 
     public String getDeviceInfo() {

@@ -1,6 +1,7 @@
 package com.galaxy.miniprogram;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
+import com.galaxy.miniprogram.bean.dto.PaySignDTO;
 import com.galaxy.miniprogram.bean.request.UnifiedOrder;
 import com.galaxy.miniprogram.bean.response.BaseReturnEntity;
 import com.galaxy.miniprogram.bean.response.ResultPayUnifiedOrder;
@@ -18,29 +19,42 @@ import java.util.TreeMap;
  */
 public class WeChatPay {
 
+    private static final String PREPAY_ID_STR;
 
-    private static final URI UNIFIEDORDER_URL_SUFFIX;
 
-
-    public static final String PREPAY_ID;
-    public static final String APP_ID;
-    public static final String NONCE_STR;
-    public static final String PACKAGE;
-    public static final String SIGN_TYPE;
-    public static final String TIME_STAMP;
-    public static final String PAY_SIGN;
+    /** 统一下单 */
+    private static final URI UNIFIEDORDER_URI;
+    /** 查询订单 */
+    private static final URI ORDERQUERY_URI;
+    /** 关闭订单 */
+    private static final URI CLOSEORDER_URI;
+    /** 申请退款 */
+    private static final URI REFUND_URI;
+    /** 查询退款 */
+    private static final URI REFUNDQUERY_URI;
+    /** 下载对账单 */
+    private static final URI DOWNLOADBILL_URI;
+    /** 下载资金账单 */
+    private static final URI DOWNLOADFUNDFLOW_URI;
+    /** 交易保障 */
+    private static final URI REPORT_URI;
+    /** 拉取订单评价数据 */
+    private static final URI BATCHQUERYCOMMENT_URI;
 
 
     static {
-        PREPAY_ID = "prepay_id=";
-        APP_ID = "appId";
-        NONCE_STR = "nonceStr";
-        PACKAGE = "package";
-        SIGN_TYPE = "signType";
-        TIME_STAMP = "timeStamp";
-        PAY_SIGN = "paySign";
 
-        UNIFIEDORDER_URL_SUFFIX = URI.create("https://api.mch.weixin.qq.com/pay/unifiedorder");
+        PREPAY_ID_STR = "prepay_id=";
+
+        UNIFIEDORDER_URI = URI.create("https://api.mch.weixin.qq.com/pay/unifiedorder");
+        ORDERQUERY_URI = URI.create("https://api.mch.weixin.qq.com/pay/orderquery");
+        CLOSEORDER_URI = URI.create("https://api.mch.weixin.qq.com/pay/closeorder");
+        REFUND_URI = URI.create("https://api.mch.weixin.qq.com/secapi/pay/refund");
+        REFUNDQUERY_URI = URI.create("https://api.mch.weixin.qq.com/secapi/pay/refund");
+        DOWNLOADBILL_URI = URI.create("https://api.mch.weixin.qq.com/pay/downloadbill");
+        DOWNLOADFUNDFLOW_URI = URI.create("https://api.mch.weixin.qq.com/pay/downloadfundflow");
+        REPORT_URI = URI.create("https://api.mch.weixin.qq.com/payitil/report");
+        BATCHQUERYCOMMENT_URI = URI.create("https://api.mch.weixin.qq.com/billcommentsp/batchquerycomment");
     }
 
     private <T extends BaseReturnEntity> T starWars(BaseEntity entity, SignType signType, String key, URI uri, Class<T> clazz) throws Exception {
@@ -64,21 +78,37 @@ public class WeChatPay {
      */
 
     public ResultPayUnifiedOrder unifiedOrder(UnifiedOrder unifiedOrder, SignType signType, String key) throws Exception {
-        return starWars(unifiedOrder, signType, key, UNIFIEDORDER_URL_SUFFIX, ResultPayUnifiedOrder.class);
+        return starWars(unifiedOrder, signType, key, UNIFIEDORDER_URI, ResultPayUnifiedOrder.class);
     }
 
 
-    public Map<String, String> toPaySignDTO(ResultPayUnifiedOrder resultPayUnifiedOrder, SignType signType, String key) throws Exception {
-        Map<String, String> PaySign = new TreeMap<String, String>();
-        PaySign.put(APP_ID, resultPayUnifiedOrder.getAppid());
-        PaySign.put(NONCE_STR, SignatureUtils.generateNonceStr());
-        PaySign.put(PACKAGE, PREPAY_ID + resultPayUnifiedOrder.getPrepayId());
-        PaySign.put(SIGN_TYPE, signType.getType());
-        PaySign.put(TIME_STAMP, String.valueOf(System.currentTimeMillis() / 1000));
-        String sign = SignatureUtils.generateSignature(PaySign, signType, key);
-        PaySign.put(PAY_SIGN, sign);
-        PaySign.remove(APP_ID);
-        return PaySign;
-    }
+    /**
+     * 小程序调起支付数据签名字段列表：
+     * 字段名	变量名	必填	类型	示例值	描述
+     * 小程序ID	appId	是	String	wxd678efh567hg6787	微信分配的小程序ID
+     * 时间戳	timeStamp	是	String	1490840662	时间戳从1970年1月1日00:00:00至今的秒数,即当前的时间
+     * 随机串	nonceStr	是	String	5K8264ILTKCH16CQ2502SI8ZNMTM67VS	随机字符串，不长于32位。推荐随机数生成算法
+     * 数据包	package	是	String	prepay_id=wx2017033010242291fcfe0db70013231072	统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=wx2017033010242291fcfe0db70013231072
+     * 签名方式	signType	是	String	MD5	签名类型，默认为MD5，支持HMAC-SHA256和MD5。注意此处需与统一下单的签名类型一致
+     *
+     * @param resultPayUnifiedOrder
+     * @param signType
+     * @param key
+     * @return
+     * @throws Exception
+     */
+    public PaySignDTO toPaySignDTO(ResultPayUnifiedOrder resultPayUnifiedOrder, SignType signType, String key) throws Exception {
 
+        PaySignDTO paySign = new PaySignDTO();
+        paySign.setAppid(resultPayUnifiedOrder.getAppid());
+        paySign.setNonceStr(SignatureUtils.generateNonceStr());
+        paySign.setPrepayId(PREPAY_ID_STR + resultPayUnifiedOrder.getPrepayId());
+        paySign.setSignType(signType.getType());
+        paySign.setTimeStamp(String.valueOf(System.currentTimeMillis() / 1000));
+
+        String sign = SignatureUtils.generateSignature(paySign, signType, key);
+        paySign.setSign(sign);
+
+        return paySign;
+    }
 }

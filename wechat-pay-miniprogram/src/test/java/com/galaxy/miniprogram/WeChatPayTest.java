@@ -1,12 +1,11 @@
 package com.galaxy.miniprogram;
 
 import com.alibaba.fastjson.JSON;
+import com.galaxy.miniprogram.bean.dto.PaySignDTO;
 import com.galaxy.miniprogram.bean.request.UnifiedOrder;
 import com.galaxy.miniprogram.bean.response.ResultPayUnifiedOrder;
 import com.galaxy.miniprogram.util.SignType;
 import org.junit.Test;
-
-import java.util.Map;
 
 public class WeChatPayTest {
 
@@ -19,7 +18,7 @@ public class WeChatPayTest {
 
         UnifiedOrder unifiedOrder = new UnifiedOrder();
         unifiedOrder.setBody("orderTest");
-        unifiedOrder.setOutTradeNo("201911011726");
+        unifiedOrder.setOutTradeNo("20191103113619");
         unifiedOrder.setTotalFee(1);
         unifiedOrder.setSpbillCreateIp("101.64.156.106");
         unifiedOrder.setNotifyUrl("http://d5bf6ef7.ngrok.io");
@@ -32,10 +31,10 @@ public class WeChatPayTest {
 
         ResultPayUnifiedOrder resultPayUnifiedOrder = weChatPay.unifiedOrder(unifiedOrder, SignType.MD5, KEY);
 
-        Map<String, String> map = weChatPay.toPaySignDTO(resultPayUnifiedOrder, SignType.MD5, KEY);
+        PaySignDTO paySignDTO = weChatPay.toPaySignDTO(resultPayUnifiedOrder, SignType.MD5, KEY);
 
         System.out.println(JSON.toJSONString(resultPayUnifiedOrder));
-        System.out.println(JSON.toJSONString(map));
+        System.out.println(JSON.toJSONString(paySignDTO));
 
     }
 }
