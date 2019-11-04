@@ -15,22 +15,22 @@ public class SignatureUtils {
     /**
      * 生成Sign， abstractBean中的sign在包含生成当中, 请手动复制为null
      */
-    public static String generateSignature(final BaseEntity baseEntity, SignType signType, final String key) throws Exception {
+    public static String generateSignature(final BaseEntity baseEntity, String signType, final String key) throws Exception {
         baseEntity.setSignType(SignType.MD5.getType());
         Map<String, String> map = XmlSerializableUtils.toMap(baseEntity);
         return generateSignature(map, signType, key);
     }
 
-    public static String generateSignature(Map<String, String> map, SignType signType, final String key) throws Exception {
+    public static String generateSignature(Map<String, String> map, String signType, final String key) throws Exception {
         final StringBuffer sb = new StringBuffer();
         for (final Map.Entry<String, String> entry : map.entrySet()) {
             sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         }
         sb.append("key=").append(key);
 
-        if (SignType.MD5.equals(signType)) {
+        if (SignType.MD5.getType().equals(signType)) {
             return md5(sb.toString()).toUpperCase();
-        } else if (SignType.HMAC_SHA256.equals(signType)) {
+        } else if (SignType.HMAC_SHA256.getType().equals(signType)) {
             return hmacsha256(sb.toString(), key);
         } else {
             throw new Exception(String.format("Invalid signType: %s", signType));

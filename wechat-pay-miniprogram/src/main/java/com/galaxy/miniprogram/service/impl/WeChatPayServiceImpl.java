@@ -18,12 +18,15 @@ import com.galaxy.miniprogram.util.HttpUtils;
 import com.galaxy.miniprogram.util.SignType;
 import com.galaxy.miniprogram.util.SignatureUtils;
 import com.galaxy.miniprogram.util.XmlSerializableUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.net.URI;
 
 /**
  * @author galaxy
  */
+@Service
 public class WeChatPayServiceImpl implements WeChatPayService {
 
     private static final String PREPAY_ID_STR;
@@ -48,6 +51,12 @@ public class WeChatPayServiceImpl implements WeChatPayService {
     /** 拉取订单评价数据 */
     private static final URI BATCHQUERYCOMMENT_URI;
 
+    @Value("${WeChat.pay.callback.unifiedorder.uri}")
+    private String callbackUnifiedOrderUri;
+
+    @Value("${WeChat.pay.callback.refund.uri}")
+    private String callbackRefundUri;
+
 
     static {
 
@@ -67,7 +76,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
     private <T extends BaseReturnEntity> T starWars(BaseEntity entity, SignType signType, String key, URI uri, Class<T> clazz) throws Exception {
         String nonceStr = SignatureUtils.generateNonceStr();
         entity.setNonceStr(nonceStr);
-        String sign = SignatureUtils.generateSignature(entity, signType, key);
+        String sign = SignatureUtils.generateSignature(entity, signType.getType(), key);
         entity.setSign(sign);
         String requestBody = XmlSerializableUtils.toXml(entity);
         System.out.println(requestBody);
@@ -89,7 +98,9 @@ public class WeChatPayServiceImpl implements WeChatPayService {
      * 接口链接
      * URL地址：https://api.mch.weixin.qq.com/pay/unifiedorder
      */
+    @Override
     public ResultUnifiedOrder unifiedOrder(UnifiedOrder unifiedOrder, SignType signType, String key) throws Exception {
+        unifiedOrder.setNotifyUrl(callbackUnifiedOrderUri);
         return starWars(unifiedOrder, signType, key, UNIFIED_ORDER_URI, ResultUnifiedOrder.class);
     }
 
@@ -119,7 +130,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         paySign.setSignType(signType.getType());
         paySign.setTimeStamp(String.valueOf(System.currentTimeMillis() / 1000));
 
-        String sign = SignatureUtils.generateSignature(paySign, signType, key);
+        String sign = SignatureUtils.generateSignature(paySign, signType.getType(), key);
         paySign.setSign(sign);
 
         return paySign;
@@ -137,6 +148,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
     @Override
     public ResultRefund refund(Refund refund, SignType signType, String key) throws Exception {
+        refund.setNotifyUrl(callbackRefundUri);
         return starWars(refund, signType, key, REFUND_URI, ResultRefund.class);
     }
 
