@@ -13,15 +13,30 @@ public class SignatureUtils {
 
 
     /**
-     * 生成Sign， abstractBean中的sign在包含生成当中, 请手动复制为null
+     * 判断签名是否正确，必须包含sign字段，否则返回false。
+     */
+    public static boolean isSignatureValid(final BaseEntity baseEntity, String key) throws Exception {
+        if (baseEntity.getSign() != null) {
+            return false;
+        }
+        String sign = baseEntity.getSign();
+        return generateSignature(baseEntity, baseEntity.getSignType(), key).equals(sign);
+    }
+    
+
+    /**
+     * 生成Sign，
      */
     public static String generateSignature(final BaseEntity baseEntity, String signType, final String key) throws Exception {
-        baseEntity.setSignType(SignType.MD5.getType());
+        String sign = baseEntity.getSign();
+        baseEntity.setSign(null);
+        baseEntity.setSignType(signType);
         Map<String, String> map = XmlSerializableUtils.toMap(baseEntity);
+        baseEntity.setSign(sign);
         return generateSignature(map, signType, key);
     }
 
-    public static String generateSignature(Map<String, String> map, String signType, final String key) throws Exception {
+    private static String generateSignature(Map<String, String> map, String signType, final String key) throws Exception {
         final StringBuffer sb = new StringBuffer();
         for (final Map.Entry<String, String> entry : map.entrySet()) {
             sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
