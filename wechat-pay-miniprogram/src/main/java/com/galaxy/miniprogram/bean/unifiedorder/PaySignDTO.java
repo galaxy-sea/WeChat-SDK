@@ -1,5 +1,6 @@
 package com.galaxy.miniprogram.bean.unifiedorder;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.galaxy.miniprogram.bean.BaseEntity;
 
 /**
@@ -15,19 +16,19 @@ public class PaySignDTO extends BaseEntity {
     /**
      * 微信分配的小程序ID
      */
-    // @XmlValue(name = "appId")
+    @JacksonXmlProperty(localName = "appId")
     private String appid;
 
     /**
      * 时间戳从1970年1月1日00:00:00至今的秒数,即当前的时间
      */
-    // @XmlValue(name = "timeStamp")
+    @JacksonXmlProperty(localName = "timeStamp")
     private String timeStamp;
 
     /**
      * 随机字符串，不长于32位。推荐随机数生成算法
      */
-    // @XmlValue(name = "nonceStr")
+    @JacksonXmlProperty(localName = "nonceStr")
     private String nonceStr;
 
     /**
@@ -35,19 +36,19 @@ public class PaySignDTO extends BaseEntity {
      *
      * 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=wx2017033010242291fcfe0db70013231072
      */
-    // @XmlValue(name = "package")
+    @JacksonXmlProperty(localName = "package")
     private String prepayId;
 
     /**
      * 签名类型，默认为MD5，支持HMAC-SHA256和MD5。注意此处需与统一下单的签名类型一致
      */
-    // @XmlValue(name = "signType")
+    @JacksonXmlProperty(localName = "signType")
     private String signType;
 
     /**
      * 签名
      */
-    // @XmlValue(name = "paySign")
+    @JacksonXmlProperty(localName = "paySign")
     private String sign;
 
 

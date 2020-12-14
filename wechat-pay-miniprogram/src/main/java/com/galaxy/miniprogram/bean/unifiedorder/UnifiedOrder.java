@@ -1,6 +1,10 @@
 package com.galaxy.miniprogram.bean.unifiedorder;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.galaxy.miniprogram.bean.BaseEntity;
+
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * 统一下单
@@ -19,58 +23,60 @@ import com.galaxy.miniprogram.bean.BaseEntity;
  **/
 public class UnifiedOrder extends BaseEntity {
 
-    // @XmlValue(name = "device_info")
+    @JacksonXmlProperty(localName = "device_info")
     private String deviceInfo;
 
-    // @XmlValue(name = "body")
+    @JacksonXmlProperty(localName = "body")
     private String body;
 
-    // @XmlValue(name = "detail", isCDATA = true)
+    @JacksonXmlProperty(localName = "detail")
+    @JacksonXmlCData
     private String detail;
 
-    // @XmlValue(name = "attach")
+    @JacksonXmlProperty(localName = "attach")
     private String attach;
 
-    // @XmlValue(name = "out_trade_no")
+    @JacksonXmlProperty(localName = "out_trade_no")
     private String outTradeNo;
 
-    // @XmlValue(name = "fee_type")
+    @JacksonXmlProperty(localName = "fee_type")
     private String feeType;
 
-    // @XmlValue(name = "total_fee")
+    @JacksonXmlProperty(localName = "total_fee")
     private Integer totalFee;
 
-    // @XmlValue(name = "spbill_create_ip")
+    @JacksonXmlProperty(localName = "spbill_create_ip")
     private String spbillCreateIp;
 
-    // @XmlValue(name = "time_start")
+    @JacksonXmlProperty(localName = "time_start")
     private String timeStart;
 
-    // @XmlValue(name = "time_expire")
+    @JacksonXmlProperty(localName = "time_expire")
     private String timeExpire;
 
-    // @XmlValue(name = "goods_tag")
+    @JacksonXmlProperty(localName = "goods_tag")
     private String goodsTag;
 
-    // @XmlValue(name = "notify_url")
+   
+    @JacksonXmlProperty(localName = "notify_url")
     private String notifyUrl;
 
-    // @XmlValue(name = "trade_type")
+    @JacksonXmlProperty(localName = "trade_type")
     private String tradeType;
 
-    // @XmlValue(name = "product_id")
+    @JacksonXmlProperty(localName = "product_id")
     private String productId;
 
-    // @XmlValue(name = "limit_pay")
+    @JacksonXmlProperty(localName = "limit_pay")
     private String limitPay;
 
-    // @XmlValue(name = "openid")
+    @JacksonXmlProperty(localName = "openid")
     private String openid;
-
-    // @XmlValue(name = "receipt")
+   
+    @JacksonXmlProperty(localName = "receipt")
     private String receipt;
 
-    // @XmlValue(name = "scene_info")
+    @JacksonXmlProperty(localName = "scene_info")
     private String sceneInfo;
 
     public String getDeviceInfo() {

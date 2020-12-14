@@ -1,5 +1,8 @@
 package com.galaxy.miniprogram.bean;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * 返回格式
  * <xml>
@@ -74,7 +77,8 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * SUCCESS/FAIL
      * 此字段是通信标识，非交易标识，交易是否成功需要查看result_code来判断
      */
-    // @XmlValue(name = "return_code", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "return_code")
     protected String returnCode;
 
     /**
@@ -84,7 +88,8 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 签名失败
      * 参数格式校验错误
      */
-    // @XmlValue(name = "return_msg", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "return_msg")
     protected String returnMsg;
 
     // =======================以下字段在return_code为SUCCESS的时候有返回====================================
@@ -94,7 +99,8 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 是
      * SUCCESS/FAIL
      */
-    // @XmlValue(name = "result_code", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "result_code")
     protected String resultCode;
 
     /**
@@ -102,14 +108,16 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 是
      * SUCCESS/FAIL
      */
-    // @XmlValue(name = "result_msg", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "result_msg")
     protected String resultMsg;
 
     /**
      * 错误代码
      * 否
      */
-    // @XmlValue(name = "err_code", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "err_code")
     protected String errCode;
 
     /**
@@ -117,7 +125,8 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 否
      * 错误信息描述
      */
-    // @XmlValue(name = "err_code_des", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "err_code_des")
     protected String errCodeDes;
 
     public String getReturnCode() {

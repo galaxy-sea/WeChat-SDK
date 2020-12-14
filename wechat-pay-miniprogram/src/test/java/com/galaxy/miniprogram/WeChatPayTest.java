@@ -1,6 +1,5 @@
 package com.galaxy.miniprogram;
 
-import com.alibaba.fastjson.JSON;
 import com.galaxy.miniprogram.bean.BaseEntity;
 import com.galaxy.miniprogram.bean.orderquery.OrderQuery;
 import com.galaxy.miniprogram.bean.orderquery.ResultOrderQuery;
@@ -47,8 +46,6 @@ public class WeChatPayTest {
 
         PaySignDTO paySignDTO = weChatPayService.toPaySignDTO(resultUnifiedOrder, SignType.MD5, KEY);
 
-        System.out.println(JSON.toJSONString(resultUnifiedOrder));
-        System.out.println(JSON.toJSONString(paySignDTO));
 
     }
 
@@ -59,7 +56,6 @@ public class WeChatPayTest {
         set(orderQuery);
         orderQuery.setOutTradeNo("20191103113619");
         ResultOrderQuery resultOrderQuery = weChatPay.orderQuery(orderQuery, SignType.MD5, KEY);
-        System.out.println(JSON.toJSONString(resultOrderQuery));
     }
 
     @Test

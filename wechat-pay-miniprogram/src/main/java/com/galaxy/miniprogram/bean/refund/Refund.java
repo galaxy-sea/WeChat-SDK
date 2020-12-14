@@ -1,5 +1,6 @@
 package com.galaxy.miniprogram.bean.refund;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.galaxy.miniprogram.bean.BaseEntity;
 
 /**
@@ -24,34 +25,34 @@ import com.galaxy.miniprogram.bean.BaseEntity;
  **/
 public class Refund extends BaseEntity {
 
-    // @XmlValue(name = "transaction_id")
+    @JacksonXmlProperty(localName = "transaction_id")
     private String transactionId;
 
 
-    // @XmlValue(name = "out_trade_no")
+    @JacksonXmlProperty(localName = "out_trade_no")
     private String outTradeNo;
 
 
-    // @XmlValue(name = "out_refund_no")
+    @JacksonXmlProperty(localName = "out_refund_no")
     private String outRefundNo;
 
-    // @XmlValue(name = "total_fee")
+    @JacksonXmlProperty(localName = "total_fee")
     private Integer totalFee;
 
-    // @XmlValue(name = "refund_fee")
+    @JacksonXmlProperty(localName = "refund_fee")
     private Integer refundFee;
 
-    // @XmlValue(name = "refund_fee_type")
+    @JacksonXmlProperty(localName = "refund_fee_type")
     private String refundFeeType;
 
 
-    // @XmlValue(name = "refund_desc")
+    @JacksonXmlProperty(localName = "refund_desc")
     private String refundDesc;
 
-    // @XmlValue(name = "refund_account")
+    @JacksonXmlProperty(localName = "refund_account")
     private String refundAccount;
 
-    // @XmlValue(name = "notify_url")
+    @JacksonXmlProperty(localName = "notify_url")
     private String notifyUrl;
 
 

@@ -86,12 +86,12 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         entity.setSign(sign);
         String requestBody = xmlMapper.writeValueAsString(entity);
         System.out.println(requestBody);
-        System.out.println();
+        System.out.println(11111);
         System.out.println();
         System.out.println();
         String responseBody = HttpUtils.doPost(uri, requestBody);
         System.out.println(responseBody);
-        System.out.println();
+        System.out.println(22222);
         System.out.println();
         System.out.println();
         // return XmlSerializableUtils.toObject(responseBody, clazz);

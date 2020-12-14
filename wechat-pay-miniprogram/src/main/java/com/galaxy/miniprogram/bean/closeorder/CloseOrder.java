@@ -1,5 +1,6 @@
 package com.galaxy.miniprogram.bean.closeorder;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.galaxy.miniprogram.bean.BaseEntity;
 
 /**
@@ -18,7 +19,7 @@ import com.galaxy.miniprogram.bean.BaseEntity;
  **/
 public class CloseOrder extends BaseEntity {
 
-    // @XmlValue(name = "out_trade_no")
+    @JacksonXmlProperty(localName = "out_trade_no")
     private String outTradeNo;
 
     public String getOutTradeNo() {

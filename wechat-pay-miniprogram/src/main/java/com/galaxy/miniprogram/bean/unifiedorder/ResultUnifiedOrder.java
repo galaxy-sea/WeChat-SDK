@@ -1,5 +1,7 @@
 package com.galaxy.miniprogram.bean.unifiedorder;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.galaxy.miniprogram.bean.BaseReturnEntity;
 
 /**
@@ -11,27 +13,31 @@ public class ResultUnifiedOrder extends BaseReturnEntity {
     /**
      * 交易类型，取值为：JSAPI，NATIVE，APP等
      */
-    // @XmlValue(name = "device_info", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "device_info")
     private String deviceInfo;
 
     /**
      * 微信生成的预支付会话标识，用于后续接口调用中使用，该值有效期为2小时
      */
-    // @XmlValue(name = "trade_type", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "trade_type")
     private String tradeType;
 
     /**
      * trade_type=NATIVE时有返回，此url用于生成支付二维码，然后提供给用户进行扫码支付。
      * 注意：code_url的值并非固定，使用时按照URL格式转成二维码即可
      */
-    // @XmlValue(name = "prepay_id", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "prepay_id")
     private String prepayId;
 
     /**
      * trade_type=NATIVE时有返回，此url用于生成支付二维码，然后提供给用户进行扫码支付。
      * 注意：code_url的值并非固定，使用时按照URL格式转成二维码即可
      */
-    // @XmlValue(name = "code_url", isCDATA = true)
+    @JacksonXmlCData
+    @JacksonXmlProperty(localName = "code_url")
     private String codeUrl;
 
 

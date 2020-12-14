@@ -3,6 +3,7 @@ package com.galaxy.miniprogram;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +44,9 @@ public class XmlTest {
 class SimpleBean {
     private int x = 1;
     private int y = 2;
+    // @JacksonXmlProperty(localName = "y_date", namespace = "y_date")
+    // @JsonAlias("y_date")
+    @JacksonXmlProperty(localName = "y_date")
     private int yDate = 2;
     private int y_Date_data = 2;
     private Integer z;

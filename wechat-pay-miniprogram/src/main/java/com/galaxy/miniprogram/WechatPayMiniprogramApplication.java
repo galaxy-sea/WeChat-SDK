@@ -19,8 +19,9 @@ public class WechatPayMiniprogramApplication {
     @Bean
     public XmlMapper xmlMapper() {
         XmlMapper xmlMapper = new XmlMapper();
-        xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true).setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        xmlMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        // xmlMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         return xmlMapper;
     }
 
