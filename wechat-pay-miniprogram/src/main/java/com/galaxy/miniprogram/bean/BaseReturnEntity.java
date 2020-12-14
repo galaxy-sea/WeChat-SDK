@@ -1,9 +1,5 @@
 package com.galaxy.miniprogram.bean;
 
-import com.galaxy.miniprogram.bean.BaseEntity;
-import com.galaxy.miniprogram.util.XmlValue;
-
-
 /**
  * 返回格式
  * <xml>
@@ -69,7 +65,6 @@ import com.galaxy.miniprogram.util.XmlValue;
  * XML_FORMAT_ERROR	XML格式错误	XML格式错误	请检查XML参数格式是否正确
  * FREQUENCY_LIMITED	频率限制	2个月之前的订单申请退款有频率限制	该笔退款未受理，请降低频率后重试
  *
- *
  * @author galaxy
  */
 public abstract class BaseReturnEntity extends BaseEntity {
@@ -79,7 +74,7 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * SUCCESS/FAIL
      * 此字段是通信标识，非交易标识，交易是否成功需要查看result_code来判断
      */
-    @XmlValue(name = "return_code", isCDATA = true)
+    // @XmlValue(name = "return_code", isCDATA = true)
     protected String returnCode;
 
     /**
@@ -89,7 +84,7 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 签名失败
      * 参数格式校验错误
      */
-    @XmlValue(name = "return_msg", isCDATA = true)
+    // @XmlValue(name = "return_msg", isCDATA = true)
     protected String returnMsg;
 
     // =======================以下字段在return_code为SUCCESS的时候有返回====================================
@@ -99,7 +94,7 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 是
      * SUCCESS/FAIL
      */
-    @XmlValue(name = "result_code", isCDATA = true)
+    // @XmlValue(name = "result_code", isCDATA = true)
     protected String resultCode;
 
     /**
@@ -107,14 +102,14 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 是
      * SUCCESS/FAIL
      */
-    @XmlValue(name = "result_msg", isCDATA = true)
+    // @XmlValue(name = "result_msg", isCDATA = true)
     protected String resultMsg;
 
     /**
      * 错误代码
      * 否
      */
-    @XmlValue(name = "err_code", isCDATA = true)
+    // @XmlValue(name = "err_code", isCDATA = true)
     protected String errCode;
 
     /**
@@ -122,7 +117,7 @@ public abstract class BaseReturnEntity extends BaseEntity {
      * 否
      * 错误信息描述
      */
-    @XmlValue(name = "err_code_des", isCDATA = true)
+    // @XmlValue(name = "err_code_des", isCDATA = true)
     protected String errCodeDes;
 
     public String getReturnCode() {

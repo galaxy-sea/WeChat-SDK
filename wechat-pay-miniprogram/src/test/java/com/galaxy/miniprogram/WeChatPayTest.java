@@ -23,25 +23,25 @@ public class WeChatPayTest {
     @Autowired
     private WeChatPayService weChatPayService;
 
-    private static final String KEY = "adminllwl20191111llwladmin666666";
+    private static final String KEY = "Dae437243546747sdf23s234234ewrfa";
 
     public void set(BaseEntity entity) {
-        entity.setAppid("wx452861bdcf531613");
-        entity.setMchId("1561031551");
+        entity.setAppid("wx2e9cefc3e1f292e6");
+        entity.setMchId("1305713801");
     }
 
     @Test
     public void unifiedOrder() throws Exception {
         UnifiedOrder unifiedOrder = new UnifiedOrder();
         unifiedOrder.setBody("orderTest");
-        unifiedOrder.setOutTradeNo("201911041349");
+        unifiedOrder.setOutTradeNo(String.valueOf(System.currentTimeMillis()));
         unifiedOrder.setTotalFee(1);
         unifiedOrder.setSpbillCreateIp("101.64.156.106");
         unifiedOrder.setTradeType("JSAPI");
         // unifiedOrder.setSignType();
-        unifiedOrder.setAppid("wx452861bdcf531613");
-        unifiedOrder.setMchId("1561031551");
-        unifiedOrder.setOpenid("oc6cs5Fg7-XMANpQEnJ8b-cLTTik");
+        unifiedOrder.setAppid("wx2e9cefc3e1f292e6");
+        unifiedOrder.setMchId("1305713801");
+        unifiedOrder.setOpenid("oqKS-4iWf-y-CL0sGuPItozc7BWM");
 
         ResultUnifiedOrder resultUnifiedOrder = weChatPayService.unifiedOrder(unifiedOrder, SignType.MD5, KEY);
 

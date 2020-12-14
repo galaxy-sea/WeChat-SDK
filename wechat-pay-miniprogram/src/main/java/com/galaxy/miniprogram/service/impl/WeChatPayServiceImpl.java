@@ -1,5 +1,6 @@
 package com.galaxy.miniprogram.service.impl;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.galaxy.miniprogram.bean.BaseEntity;
 import com.galaxy.miniprogram.bean.BaseReturnEntity;
 import com.galaxy.miniprogram.bean.closeorder.CloseOrder;
@@ -17,7 +18,7 @@ import com.galaxy.miniprogram.service.WeChatPayService;
 import com.galaxy.miniprogram.util.HttpUtils;
 import com.galaxy.miniprogram.util.SignType;
 import com.galaxy.miniprogram.util.SignatureUtils;
-import com.galaxy.miniprogram.util.XmlSerializableUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,11 @@ import java.net.URI;
  */
 @Service
 public class WeChatPayServiceImpl implements WeChatPayService {
+
+
+    @Autowired
+    private XmlMapper xmlMapper;
+
 
     private static final String PREPAY_ID_STR;
 
@@ -78,7 +84,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         entity.setNonceStr(nonceStr);
         String sign = SignatureUtils.generateSignature(entity, signType.getType(), key);
         entity.setSign(sign);
-        String requestBody = XmlSerializableUtils.toXml(entity);
+        String requestBody = xmlMapper.writeValueAsString(entity);
         System.out.println(requestBody);
         System.out.println();
         System.out.println();
@@ -88,7 +94,8 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         System.out.println();
         System.out.println();
         System.out.println();
-        return XmlSerializableUtils.toObject(responseBody, clazz);
+        // return XmlSerializableUtils.toObject(responseBody, clazz);
+        return xmlMapper.readValue(responseBody, clazz);
     }
 
     /**

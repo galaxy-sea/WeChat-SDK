@@ -1,6 +1,6 @@
 package com.galaxy.miniprogram.bean;
 
-import com.galaxy.miniprogram.util.XmlValue;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * 公共的五个参数
@@ -12,37 +12,38 @@ import com.galaxy.miniprogram.util.XmlValue;
  *
  * @author galaxy
  */
+@JacksonXmlRootElement(localName = "xml")
 public abstract class BaseEntity {
 
     /**
      * 微信分配的小程序ID
      */
-    @XmlValue(name = "appid")
+    // @XmlValue(name = "appid")
     protected String appid;
 
     /**
      * 微信支付分配的商户号
      */
-    @XmlValue(name = "mch_id")
+    // @XmlValue(name = "mch_id")
     protected String mchId;
 
     /**
      * 随机字符串，长度要求在32位以内。
      * 无需关心, 回自动生成的
      */
-    @XmlValue(name = "nonce_str")
+    // @XmlValue(name = "nonce_str")
     protected String nonceStr;
 
     /**
      * 通过签名算法计算得出的签名值
      */
-    @XmlValue(name = "sign")
+    // @XmlValue(name = "sign")
     protected String sign;
 
     /**
      * 签名类型，默认为MD5，支持HMAC-SHA256和MD5。
      */
-    @XmlValue(name = "sign_type")
+    // @XmlValue(name = "sign_type")
     protected String signType;
 
 

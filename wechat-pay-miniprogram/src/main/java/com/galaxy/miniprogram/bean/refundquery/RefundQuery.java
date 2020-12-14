@@ -1,7 +1,6 @@
 package com.galaxy.miniprogram.bean.refundquery;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
-import com.galaxy.miniprogram.util.XmlValue;
 
 /**
  * 查询退款
@@ -32,23 +31,23 @@ import com.galaxy.miniprogram.util.XmlValue;
  **/
 public class RefundQuery extends BaseEntity {
 
-    @XmlValue(name = "transaction_id")
+    // @XmlValue(name = "transaction_id")
     private String transactionId;
 
 
-    @XmlValue(name = "out_trade_no")
+    // @XmlValue(name = "out_trade_no")
     private String outTradeNo;
 
 
-    @XmlValue(name = "out_refund_no")
+    // @XmlValue(name = "out_refund_no")
     private String outRefundNo;
 
 
-    @XmlValue(name = "refund_id")
+    // @XmlValue(name = "refund_id")
     private String refundId;
 
 
-    @XmlValue(name = "offset")
+    // @XmlValue(name = "offset")
     private String offset;
 
     public String getTransactionId() {

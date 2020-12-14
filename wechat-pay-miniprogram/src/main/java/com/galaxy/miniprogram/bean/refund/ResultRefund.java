@@ -1,7 +1,6 @@
 package com.galaxy.miniprogram.bean.refund;
 
 import com.galaxy.miniprogram.bean.BaseReturnEntity;
-import com.galaxy.miniprogram.util.XmlValue;
 
 /**
  * @Author galaxy
@@ -9,74 +8,70 @@ import com.galaxy.miniprogram.util.XmlValue;
  **/
 public class ResultRefund extends BaseReturnEntity {
 
-    @XmlValue(name = "transaction_id")
+    // @XmlValue(name = "transaction_id")
     private String transactionId;
 
 
-    @XmlValue(name = "out_trade_no")
+    // @XmlValue(name = "out_trade_no")
     private String outTradeNo;
 
 
-    @XmlValue(name = "out_refund_no")
+    // @XmlValue(name = "out_refund_no")
     private String outRefundNo;
 
 
-    @XmlValue(name = "refund_id")
+    // @XmlValue(name = "refund_id")
     private String refundId;
 
 
-
-    @XmlValue(name = "refund_fee")
+    // @XmlValue(name = "refund_fee")
     private Integer refundFee;
 
 
-
-    @XmlValue(name = "settlement_refund_fee")
+    // @XmlValue(name = "settlement_refund_fee")
     private Integer settlementRefundFee;
 
 
-
-    @XmlValue(name = "total_fee")
+    // @XmlValue(name = "total_fee")
     private Integer totalFee;
 
 
-
-    @XmlValue(name = "settlement_total_fee")
+    // @XmlValue(name = "settlement_total_fee")
     private Integer settlementTotalFee;
 
 
-    @XmlValue(name = "fee_type")
+    // @XmlValue(name = "fee_type")
     private String feeType;
 
 
-    @XmlValue(name = "cash_fee")
+    // @XmlValue(name = "cash_fee")
     private Integer cashFee;
 
 
-    @XmlValue(name = "cash_fee_type")
+    // @XmlValue(name = "cash_fee_type")
     private String cashFeeType;
 
 
-    @XmlValue(name = "cash_refund_fee")
-    private String 	cashRefundFee;
+    // @XmlValue(name = "cash_refund_fee")
+    private String cashRefundFee;
 
 
-    @XmlValue(name = "coupon_type_$n")
+    // @XmlValue(name = "coupon_type_$n")
     private String couponType$N;
 
 
-    @XmlValue(name = "coupon_refund_fee")
+    // @XmlValue(name = "coupon_refund_fee")
     private Integer couponRefundFee;
 
 
-    @XmlValue(name = "coupon_refund_fee_$n")
+    // @XmlValue(name = "coupon_refund_fee_$n")
     private Integer couponRefundFee$N;
 
 
-    @XmlValue(name = "coupon_refund_count")
+    // @XmlValue(name = "coupon_refund_count")
     private Integer couponRefundCount;
 
-    @XmlValue(name = "coupon_refund_id_$n")
+    // @XmlValue(name = "coupon_refund_id_$n")
     private String couponRefundId$N;
 
 

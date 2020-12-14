@@ -1,7 +1,6 @@
 package com.galaxy.miniprogram.bean.refund;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
-import com.galaxy.miniprogram.util.XmlValue;
 
 /**
  * 当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，
@@ -25,34 +24,34 @@ import com.galaxy.miniprogram.util.XmlValue;
  **/
 public class Refund extends BaseEntity {
 
-    @XmlValue(name = "transaction_id")
+    // @XmlValue(name = "transaction_id")
     private String transactionId;
 
 
-    @XmlValue(name = "out_trade_no")
+    // @XmlValue(name = "out_trade_no")
     private String outTradeNo;
 
 
-    @XmlValue(name = "out_refund_no")
+    // @XmlValue(name = "out_refund_no")
     private String outRefundNo;
 
-    @XmlValue(name = "total_fee")
+    // @XmlValue(name = "total_fee")
     private Integer totalFee;
 
-    @XmlValue(name = "refund_fee")
+    // @XmlValue(name = "refund_fee")
     private Integer refundFee;
 
-    @XmlValue(name = "refund_fee_type")
+    // @XmlValue(name = "refund_fee_type")
     private String refundFeeType;
 
 
-    @XmlValue(name = "refund_desc")
+    // @XmlValue(name = "refund_desc")
     private String refundDesc;
 
-    @XmlValue(name = "refund_account")
+    // @XmlValue(name = "refund_account")
     private String refundAccount;
 
-    @XmlValue(name = "notify_url")
+    // @XmlValue(name = "notify_url")
     private String notifyUrl;
 
 

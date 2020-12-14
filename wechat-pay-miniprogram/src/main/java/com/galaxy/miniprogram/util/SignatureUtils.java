@@ -1,6 +1,7 @@
 package com.galaxy.miniprogram.util;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -8,6 +9,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class SignatureUtils {
 
@@ -31,14 +33,16 @@ public class SignatureUtils {
         String sign = baseEntity.getSign();
         baseEntity.setSign(null);
         baseEntity.setSignType(signType);
-        Map<String, String> map = XmlSerializableUtils.toMap(baseEntity);
+        // Map<String, String> map = XmlSerializableUtils.toMap(baseEntity);
+        TreeMap<String, Object> map = new TreeMap<>();
+        BeanUtils.populate(baseEntity, map);
         baseEntity.setSign(sign);
         return generateSignature(map, signType, key);
     }
 
-    private static String generateSignature(Map<String, String> map, String signType, final String key) throws Exception {
+    private static String generateSignature(Map<String, Object> map, String signType, final String key) throws Exception {
         final StringBuffer sb = new StringBuffer();
-        for (final Map.Entry<String, String> entry : map.entrySet()) {
+        for (final Map.Entry<String, Object> entry : map.entrySet()) {
             sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         }
         sb.append("key=").append(key);

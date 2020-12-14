@@ -1,7 +1,6 @@
 package com.galaxy.miniprogram.bean.unifiedorder;
 
 import com.galaxy.miniprogram.bean.BaseEntity;
-import com.galaxy.miniprogram.util.XmlValue;
 
 /**
  * 统一下单
@@ -20,58 +19,58 @@ import com.galaxy.miniprogram.util.XmlValue;
  **/
 public class UnifiedOrder extends BaseEntity {
 
-    @XmlValue(name = "device_info")
+    // @XmlValue(name = "device_info")
     private String deviceInfo;
 
-    @XmlValue(name = "body")
+    // @XmlValue(name = "body")
     private String body;
 
-    @XmlValue(name = "detail", isCDATA = true)
+    // @XmlValue(name = "detail", isCDATA = true)
     private String detail;
 
-    @XmlValue(name = "attach")
+    // @XmlValue(name = "attach")
     private String attach;
 
-    @XmlValue(name = "out_trade_no")
+    // @XmlValue(name = "out_trade_no")
     private String outTradeNo;
 
-    @XmlValue(name = "fee_type")
+    // @XmlValue(name = "fee_type")
     private String feeType;
 
-    @XmlValue(name = "total_fee")
+    // @XmlValue(name = "total_fee")
     private Integer totalFee;
 
-    @XmlValue(name = "spbill_create_ip")
+    // @XmlValue(name = "spbill_create_ip")
     private String spbillCreateIp;
 
-    @XmlValue(name = "time_start")
+    // @XmlValue(name = "time_start")
     private String timeStart;
 
-    @XmlValue(name = "time_expire")
+    // @XmlValue(name = "time_expire")
     private String timeExpire;
 
-    @XmlValue(name = "goods_tag")
+    // @XmlValue(name = "goods_tag")
     private String goodsTag;
 
-    @XmlValue(name = "notify_url")
+    // @XmlValue(name = "notify_url")
     private String notifyUrl;
 
-    @XmlValue(name = "trade_type")
+    // @XmlValue(name = "trade_type")
     private String tradeType;
 
-    @XmlValue(name = "product_id")
+    // @XmlValue(name = "product_id")
     private String productId;
 
-    @XmlValue(name = "limit_pay")
+    // @XmlValue(name = "limit_pay")
     private String limitPay;
 
-    @XmlValue(name = "openid")
+    // @XmlValue(name = "openid")
     private String openid;
 
-    @XmlValue(name = "receipt")
+    // @XmlValue(name = "receipt")
     private String receipt;
 
-    @XmlValue(name = "scene_info")
+    // @XmlValue(name = "scene_info")
     private String sceneInfo;
 
     public String getDeviceInfo() {

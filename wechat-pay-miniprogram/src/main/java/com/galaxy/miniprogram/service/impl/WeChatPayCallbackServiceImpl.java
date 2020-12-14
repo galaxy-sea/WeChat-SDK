@@ -1,9 +1,10 @@
 package com.galaxy.miniprogram.service.impl;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.galaxy.miniprogram.bean.orderquery.ResultOrderQuery;
 import com.galaxy.miniprogram.service.WeChatPayCallbackService;
 import com.galaxy.miniprogram.util.SignatureUtils;
-import com.galaxy.miniprogram.util.XmlSerializableUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,10 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class WeChatPayCallbackServiceImpl implements WeChatPayCallbackService {
 
+    @Autowired
+    private XmlMapper xmlMapper;
 
     @Override
     public void unifiedOrderCallback(String requestBody, String key) throws Exception {
-        ResultOrderQuery resultOrderQuery = XmlSerializableUtils.toObject(requestBody, ResultOrderQuery.class);
+        ResultOrderQuery resultOrderQuery = xmlMapper.readValue(requestBody, ResultOrderQuery.class);
         boolean signatureValid = SignatureUtils.isSignatureValid(resultOrderQuery, key);
         if (signatureValid) {
             System.out.println("业务成功");
